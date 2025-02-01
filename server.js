@@ -4,7 +4,7 @@ import cors from 'cors';
 import connectDB from './config/database.js'; 
 import authRoutes from './routes/authRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
-
+import roomRoutes from './routes/roomRoutes.js';
 dotenv.config(); 
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api', profileRoutes);
-
+app.use('/api', roomRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
