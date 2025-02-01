@@ -5,6 +5,10 @@ import authMiddleware from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
 
-router.post('/profile', authMiddleware, createUserProfile);
+router.post('/profile', 
+    authMiddleware,
+    validateProfile,
+    createUserProfile
+  );
 
 export default router;

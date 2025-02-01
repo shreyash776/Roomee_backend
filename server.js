@@ -1,9 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/database');
-const authRoutes = require('./routes/authRoutes');
+import authRoutes from './routes/authRoutes.js';
 const cors = require('cors'); 
-
+import profileRoutes from './routes/profileRoutes.js';
 
 
 dotenv.config();
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRoutes);
 
-
+app.use('/api', profileRoutes);
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong!' });
