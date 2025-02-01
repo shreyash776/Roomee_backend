@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/auth', authRoutes);
-app.use('/api', profileRoutes);
+app.use('/api', profileRoutes);  
 app.use('/api', roomRoutes);
 
 app.use((err, req, res, next) => {
