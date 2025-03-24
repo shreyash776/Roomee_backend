@@ -34,6 +34,10 @@ const profileSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  profileImage: {
+    type: String, // URL to the image
+    default: ''
+  },
   lifestyleTags: [{
     type: String,
     trim: true

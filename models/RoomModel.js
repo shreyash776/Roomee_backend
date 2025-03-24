@@ -32,11 +32,16 @@ const roomSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  members: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   createdAt: {
     type: Date,
     default: Date.now
   }
-});
+}, { timestamps: true });
 
+// Ensure we don't recreate the model if it already exists
 const Room = mongoose.models.Room || mongoose.model('Room', roomSchema);
 export default Room;
