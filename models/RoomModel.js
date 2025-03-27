@@ -2,8 +2,24 @@ import mongoose from 'mongoose';
 
 const roomSchema = new mongoose.Schema({
   images: [{
-    type: String,
-    required: true
+    buffer: {
+      type: Buffer,
+      required: true
+    },
+    mimeType: {
+      type: String,
+      required: true
+    },
+    metadata: {
+      size: {
+        type: Number,
+        required: true
+      },
+      uploadedAt: {
+        type: Date,
+        default: Date.now
+      }
+    }
   }],
   address: {
     longitude: {
