@@ -1,19 +1,14 @@
-
 import express from 'express';
-import { createUserProfile, getUserProfile, updateUserProfile } from '../controllers/profileController.js';
-import { authenticate } from '../middlewares/authMiddleware.js';
+import { createUserProfile } from '../controllers/profileController.js';
+import { authenticate } from '../middlewares/authMiddleware.js'; // Imported as 'authenticate'
+import { validateProfile } from '../middlewares/profileValidation.js'; // Ensure this exists
 
 const router = express.Router();
 
-router.use(authenticate);
-
-
-router.post('/profile', createUserProfile);
-
-
-router.get('/profile', getUserProfile);
-
-
-router.put('/profile/update', updateUserProfile);
+router.post('/profile', 
+  authenticate,      // Changed from authMiddleware to authenticate
+  validateProfile, 
+  createUserProfile
+);
 
 export default router;
