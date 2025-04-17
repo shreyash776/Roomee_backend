@@ -36,7 +36,7 @@ export const signup = async (req, res) => {
 
     // Generate JWT
     const token = jwt.sign(
-      { id: newUser._id },
+      { id: newUser._id, name: newUser.name }, 
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
@@ -47,7 +47,7 @@ export const signup = async (req, res) => {
       user: {
         id: newUser._id,
         name: newUser.name,
-        email: newUser.email
+        
       }
     });
 
@@ -82,7 +82,7 @@ export const login = async (req, res) => {
 
     // Generate JWT
     const token = jwt.sign(
-      { id: user._id },
+      { id: user._id, name: user.name }, 
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
@@ -93,7 +93,7 @@ export const login = async (req, res) => {
       user: {
         id: user._id,
         name: user.name,
-        email: user.email
+        
       }
     });
 
