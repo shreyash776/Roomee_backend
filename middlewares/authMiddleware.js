@@ -18,6 +18,7 @@ export const authenticate = async (req, res, next) => {
       return res.status(401).json({ error: 'Invalid token' });
 
           }
+          // hello its me
 
     req.user = user;
     next();
@@ -26,3 +27,8 @@ export const authenticate = async (req, res, next) => {
     res.status(401).json({ error: 'Authentication failed' });
   }
 };
+
+
+// hello this is for the ci/cd pipeline testing
+// hello this is for the ci/cd pipeline testing
+ 

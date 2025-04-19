@@ -28,6 +28,12 @@ app.get('/', (req, res) => {
   res.send('Welcome to the Auth API');
 });
 
+
+app.get('/demo', (req, res) => {
+  res.send('Welcome to the demo route!');
+});
+
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled Error:', err.stack);
@@ -41,3 +47,4 @@ app.use((err, req, res, next) => {
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
