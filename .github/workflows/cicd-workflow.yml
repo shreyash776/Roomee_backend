@@ -39,6 +39,7 @@ jobs:
       - name: Delete old container
         run: docker rm -f nodejs-app-container || true
 
+     
       - name: Run docker container with env vars
         run: |
           docker run -d -p 3000:3000 \
