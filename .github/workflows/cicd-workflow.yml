@@ -23,6 +23,7 @@ jobs:
       - name: Publish image to docker hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/nodejs-app:latest
 
+  
   deploy:
     needs: build
     runs-on: self-hosted
@@ -39,15 +40,18 @@ jobs:
       - name: Delete old container
         run: docker rm -f nodejs-app-container || true
 
-     
       - name: Run docker container with env vars
         run: |
-          docker run -d -p 3000:3000 \
-            --name nodejs-app-container \
-            -e PORT=${{ secrets.PORT }} \
-            -e MONGO_URI=${{ secrets.MONGO_URI }} \
-            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-            -e CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }} \
-            -e CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }} \
-            -e CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }} \
-            ${{ secrets.DOCKER_USERNAME }}/nodejs-app:latest
+         docker run -d -p 3000:3000 \
+          --name nodejs-app-container \
+          -e PORT=${{ secrets.PORT }} \
+          -e MONGO_URI=${{ secrets.MONGO_URI }} \
+          -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+          -e CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }} \
+          -e CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }} \
+          -e CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }} \
+          ${{ secrets.DOCKER_USERNAME }}/nodejs-app:latest
+
+      - name: Show container logs if failed
+        if: failure()
+        run: docker logs nodejs-app-container || echo "No logs"
