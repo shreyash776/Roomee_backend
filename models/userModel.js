@@ -1,4 +1,3 @@
-// models/UserModel.js
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
@@ -20,10 +19,9 @@ const userSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// Check if model exists before creating it
+
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
-export default User;
+export default User;   
 
-//uwvstvsqhsbqqjnqzubj wkzujbs2
-//
+

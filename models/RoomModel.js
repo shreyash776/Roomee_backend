@@ -9,7 +9,7 @@ const roomSchema = new mongoose.Schema({
     mimeType: {
       type: String,
       required: true
-    },
+    }, 
     metadata: {
       size: {
         type: Number,

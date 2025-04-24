@@ -5,7 +5,7 @@ services:
     volumes:
       - .:/app  # Map the current directory (.) to /app inside the container
     ports:
-      - "5000:5000"
+      - "3000:3000"
     env_file:
       - .env
     restart: always  
