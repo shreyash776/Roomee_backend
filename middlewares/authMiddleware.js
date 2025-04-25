@@ -31,6 +31,3 @@ export const authenticate = async (req, res, next) => {
 };
 
 
-// hello this is for the ci/cd pipeline testing
-// hello this is for the ci/cd pipeline testing
- 
