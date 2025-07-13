@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 
-// Connect to the database
+
 connectDB();
 
 // Middleware
@@ -20,8 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Define routes
 app.use('/api/auth', authRoutes);
-app.use('/api/profile', profileRoutes);  // Changed to /api/profile for clarity
-app.use('/api/rooms', roomRoutes);       // Changed to /api/rooms for clarity
+app.use('/api/profile', profileRoutes);  
+app.use('/api/rooms', roomRoutes);      
 
 // Root route
 app.get('/', (req, res) => {
@@ -33,7 +33,7 @@ app.get('/demo', (req, res) => {
   res.send('Welcome to the demo route!');
 });
 
-
+// console.log('ALL ENV:', process.env);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled Error:', err.stack);

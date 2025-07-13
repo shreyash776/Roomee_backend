@@ -1,14 +1,15 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
-
-
+import { sendEmail } from '../utils/mailer.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Validation checks
+    
     if (!name || !email || !password) {
       return res.status(400).json({ error: 'All fields are required' });
     }
@@ -35,6 +36,22 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
+
+    try {
+      await sendEmail({
+        to: email,
+        subject: 'Account Created Successfully 🎉',
+        text: `Hello ${name},\n\nYour account has been successfully created.\n\nWelcome aboard!\n\n- Your App Team`,
+        html: `<h1>Welcome, ${name}!</h1><p>Your account has been successfully created. 🎉</p><p>We are excited to have you onboard.</p><br/><b>Thank you!</b>`,
+      });
+      console.log('✅ Email sent successfully to', email);
+    } catch (emailError) {
+      console.error('❌ Email failed to send:', emailError);
+    }
+    
+    console.log('SMTP_USER:', process.env.SMTP_USER);
+console.log('SMTP_PASS:', process.env.SMTP_PASS ? '✓ Loaded' : '✗ Not Found');
+
 
     // Generate JWT
     const token = jwt.sign(
